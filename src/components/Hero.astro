@@ -1,0 +1,144 @@
+---
+import { Icon } from "astro-icon";
+---
+
+<section class="hero-section-wrapper snap-start">
+  <div class="fingerprint-icon-column">
+    <Icon class="hero-icon" name="ic:baseline-keyboard-double-arrow-up" />
+    <Icon class="hero-icon" name="mdi:fingerprint" />
+  </div>
+</section>
+
+<script>
+  const heroSection = document.querySelector<HTMLElement>(
+    ".hero-section-wrapper"
+  );
+  const fingerprintLogo = document.querySelector<HTMLDivElement>(
+    ".fingerprint-icon-column"
+  );
+  const lichtschalterLogo = document.getElementById(
+    "dreamcapture-logo"
+  ) as HTMLDivElement;
+
+  const heroSlideoutElements = [fingerprintLogo];
+  const heroUiSLideoutTime = 8000;
+  let heroUiSlideTimeout: any;
+
+  lichtschalterLogo.style.transition =
+    "translate 800ms cubic-bezier(0.77,0,0.18,1)";
+
+  heroSlideoutElements.forEach((el) => {
+    el.style.transition = "all 800ms cubic-bezier(0.77,0,0.18,1)";
+  });
+
+  let projectsObserverOptions = {
+    rootMargin: "0px",
+    threshold: 0.25,
+  };
+
+  const projectsObserverCallback = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      if (entry.intersectionRatio >= 0.25) {
+        if (fingerprintLogo.classList.contains("slides-right")) {
+          // Reset Ui slideout Timer
+          slideInHeroUI();
+          clearTimeout(heroUiSlideTimeout);
+          heroUiSlideTimeout = setTimeout(slideOutHeroUI, heroUiSLideoutTime);
+        } else {
+          clearTimeout(heroUiSlideTimeout);
+          heroUiSlideTimeout = setTimeout(slideOutHeroUI, heroUiSLideoutTime);
+        }
+      }
+    });
+  };
+
+  const projectsObserver = new IntersectionObserver(
+    projectsObserverCallback,
+    projectsObserverOptions
+  );
+  projectsObserver.observe(heroSection);
+
+  const slideOutHeroUI = () => {
+    fingerprintLogo.classList.add("slides-right");
+    lichtschalterLogo.style.translate = "-100vw 0";
+  };
+
+  const slideInHeroUI = () => {
+    fingerprintLogo.classList.remove("slides-right");
+    lichtschalterLogo.style.translate = "0";
+  };
+
+  const handleClickOnHero = () => {
+    if (!fingerprintLogo.classList.contains("slides-right")) {
+      // Reset Ui slideout Timer
+      clearTimeout(heroUiSlideTimeout);
+      slideOutHeroUI();
+    } else {
+      // Reset Ui slideout Timer
+      clearTimeout(heroUiSlideTimeout);
+      slideInHeroUI();
+      heroUiSlideTimeout = setTimeout(slideOutHeroUI, heroUiSLideoutTime);
+    }
+  };
+
+  heroSection.addEventListener("click", handleClickOnHero);
+</script>
+
+<style>
+  .hero-section-wrapper {
+    position: relative;
+    overflow: hidden;
+    background-image: url("/assets/photos/title.jpg");
+    background-position: center;
+    height: 100vh;
+    object-fit: cover;
+    scroll-snap-align: start;
+  }
+  .fingerprint-icon-column {
+    position: absolute;
+    height: 6rem;
+    right: 3rem;
+    bottom: 5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    animation: ping 4s ease-in-out infinite;
+  }
+
+  @keyframes ping {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+  @keyframes upAndDown {
+    to {
+      transform: translateY(-0.5rem);
+    }
+  }
+
+  [astro-icon] {
+    width: 3rem;
+    color: var(--projects-ui-color);
+  }
+  [astro-icon="ic:baseline-keyboard-double-arrow-up"] {
+    width: 2rem;
+    animation: upAndDown 2s ease-in-out infinite;
+  }
+
+  .slides-right {
+    transform: translateX(50vw);
+    opacity: 0;
+  }
+  .slides-left {
+    transform: translateX(-50vw);
+    opacity: 0;
+  }
+</style>
