@@ -1,27 +1,14 @@
 [
   {
-    "url": "./src/assets/videos/test-1.mp4",
-    "stats": "04/2022",
-    "cover": "#042959"
+    "playbackId": "EcHgOK9coz5K4rjSwOkoE7Y7O01201YMIC200RI6lNxnhs",
+    "stats": "test"
   },
   {
-    "url": "./src/assets/videos/test-2.mp4",
-    "stats": "06/2022",
-    "cover": "#08428C"
+    "playbackId": "EcHgOK9coz5K4rjSwOkoE7Y7O01201YMIC200RI6lNxnhs",
+    "stats": "test"
   },
   {
-    "url": "./src/assets/videos/test-3.mp4",
-    "stats": "08/2022",
-    "cover": "#032340"
-  },
-  {
-    "url": "./src/assets/videos/test-4.mp4",
-    "stats": "09/2022",
-    "cover": "#021526"
-  },
-  {
-    "url": "./src/assets/videos/test-5.mp4",
-    "stats": "12/2022",
-    "cover": "#369AD9"
+    "playbackId": "EcHgOK9coz5K4rjSwOkoE7Y7O01201YMIC200RI6lNxnhs",
+    "stats": "test"
   }
 ]

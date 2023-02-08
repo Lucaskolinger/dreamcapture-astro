@@ -1,5 +1,5 @@
 ---
-import ProjectVideos from "../photos.json";
+import ProjectVideos from "../videos.json";
 import { Icon } from "astro-icon";
 ---
 
@@ -100,43 +100,50 @@ import { Icon } from "astro-icon";
     </button>
   </nav>
   <div class="slider-videos">
-    <!-- Somehow doesn't let me take the -1th index!!! -->
-    <!-- Vllt muss ich sie doch noch dynamisch im Js reinholen aber dann werden sie client side gerendered -->
+    <mux-player
+      autoplay="muted"
+      loop
+      stream-type="on-demand"
+      data-date={ProjectVideos[2].stats}
+      playback-id={ProjectVideos[2].playbackId}
+      metadata-video-title="Test VOD"
+      metadata-viewer-user-id="user-id-007"></mux-player>
 
-    <!-- <video autoplay loop muted data-date={ProjectVideos[4].stats}>
-      <source src={ProjectVideos[4].url} type="video/mp4" />
-    </video>
     {
       ProjectVideos.map((projectVideo) => (
         <>
-          <video autoplay loop muted data-date={projectVideo.stats}>
-            <source src={projectVideo.url} type="video/mp4" />
-          </video>
+          <mux-player
+            autoplay="muted"
+            loop
+            stream-type="on-demand"
+            data-date={projectVideo.stats}
+            playback-id={projectVideo.playbackId}
+            metadata-video-title="Test VOD"
+            metadata-viewer-user-id="user-id-007"
+          />
         </>
       ))
     }
-    <video autoplay loop muted data-date={ProjectVideos[0].stats}>
-      <source src={ProjectVideos[0].url} type="video/mp4" />
-    </video> -->
 
-    <img src={ProjectVideos[4].url} data-date={ProjectVideos[4].stats} />
-    {
-      ProjectVideos.map((projectVideo) => (
-        <>
-          <img src={projectVideo.url} data-date={projectVideo.stats} />
-        </>
-      ))
-    }
-    <img src={ProjectVideos[0].url} data-date={ProjectVideos[0].stats} />
+    <mux-player
+      stream-type="on-demand"
+      loop
+      autoplay="muted"
+      data-date={ProjectVideos[0].stats}
+      playback-id={ProjectVideos[0].playbackId}
+      metadata-video-title="Test VOD"
+      metadata-viewer-user-id="user-id-007"></mux-player>
   </div>
 </section>
 
 <script>
   const sliderSection = document.querySelector<HTMLElement>(".projects-slider");
-
   const sliderVideos = document.querySelector<HTMLDivElement>(".slider-videos");
 
-  const slidesArray = [...sliderVideos.querySelectorAll<HTMLDivElement>("img")];
+  const slidesArray = [
+    ...sliderVideos.querySelectorAll<HTMLElement>("mux-player"),
+  ];
+
   const leftArrow =
     document.querySelector<HTMLButtonElement>(".slider__btn--left");
 
@@ -387,7 +394,7 @@ import { Icon } from "astro-icon";
 
 <style>
   :root {
-    --projects-ui-color: hsla(0, 0%, 100%, 0.958);
+    --projects-ui-color: hsla(0, 86%, 28%, 0.958);
   }
 
   /* Slider */
@@ -400,11 +407,16 @@ import { Icon } from "astro-icon";
 
   .slider-videos {
     display: flex;
+    width: 500vw;
     height: 100vh;
   }
-  .slider-videos > img {
+  .slider-videos > mux-player {
+    --media-object-fit: cover;
+    --controls: none;
     position: relative;
+    border: none;
     width: 100vw;
+    height: 100vh;
     object-fit: cover;
   }
 
@@ -522,6 +534,7 @@ import { Icon } from "astro-icon";
 
   .projects-dropdown-menu button {
     display: flex;
+    align-items: center;
     gap: 1rem;
     transition: all 450ms cubic-bezier(0.77, 0, 0.18, 1);
     font-family: "quicksand";
