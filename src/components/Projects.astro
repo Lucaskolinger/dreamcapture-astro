@@ -4,7 +4,6 @@ import { Icon } from "astro-icon";
 ---
 
 <section class="projects-slider">
-  <div class="projects-logo slides-left">Logo</div>
   <div class="projects-date slides-up">test</div>
   <div class="slider__btn-container">
     <button
@@ -159,17 +158,15 @@ import { Icon } from "astro-icon";
   );
 
   const dateUi = document.querySelector(".projects-date") as HTMLElement | null;
-  const logo = document.querySelector(".projects-logo") as HTMLElement | null;
   const arrayOfElementsToToggle = [
     leftArrow,
     rightArrow,
     menuBtn,
     dateUi,
-    logo,
     projectsDropdown,
   ];
 
-  const autoplayTime = 4000;
+  const autoplayTime = 8000;
   const projectUiSlideTime = 8000;
   let projectsUiSlideTimeout: any;
   let slideIndex = 1;
@@ -218,7 +215,6 @@ import { Icon } from "astro-icon";
     rightArrow.classList.add("slides-right");
     menuBtn.classList.add("slides-down");
     dateUi.classList.add("slides-up");
-    logo.classList.add("slides-left");
     projectsDropdown.classList.add("slides-down");
   };
 
@@ -227,7 +223,6 @@ import { Icon } from "astro-icon";
     rightArrow.classList.remove("slides-right");
     menuBtn.classList.remove("slides-down");
     dateUi.classList.remove("slides-up");
-    logo.classList.remove("slides-left");
     projectsDropdown.classList.remove("slides-down");
   };
 
@@ -420,7 +415,7 @@ import { Icon } from "astro-icon";
     object-fit: cover;
   }
 
-  /* Project Stats and Logo */
+  /* Project Stats */
   .projects-date {
     position: absolute;
     top: 2rem;
@@ -430,22 +425,6 @@ import { Icon } from "astro-icon";
     align-items: center;
     justify-content: center;
     z-index: 1;
-  }
-
-  .projects-logo {
-    position: absolute;
-    left: 20vw;
-    background-color: var(--projects-ui-color);
-    opacity: 0.5;
-    width: 2rem;
-    top: 1.4rem;
-    aspect-ratio: 1;
-    border-radius: 100%;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.5rem;
   }
 
   /* Slider controls */
