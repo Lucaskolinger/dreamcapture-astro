@@ -103,8 +103,8 @@ import { Icon } from "astro-icon";
       autoplay="muted"
       loop
       stream-type="on-demand"
-      data-date={ProjectVideos[2].stats}
-      playback-id={ProjectVideos[2].playbackId}
+      data-date={ProjectVideos[1].stats}
+      playback-id={ProjectVideos[1].playbackId}
       metadata-video-title="Test VOD"
       metadata-viewer-user-id="user-id-007"></mux-player>
 
@@ -389,7 +389,7 @@ import { Icon } from "astro-icon";
 
 <style>
   :root {
-    --projects-ui-color: hsla(0, 86%, 28%, 0.958);
+    --projects-ui-color: hsla(0, 0%, 100%, 0.9);
   }
 
   /* Slider */
@@ -397,21 +397,22 @@ import { Icon } from "astro-icon";
     position: relative;
     overflow: hidden;
     scroll-snap-align: start;
-    width: 100vw;
+    scroll-snap-stop: always;
+    height: 100%;
   }
 
   .slider-videos {
     display: flex;
-    width: 500vw;
-    height: 100vh;
+    width: 400%;
+    height: 100%;
   }
   .slider-videos > mux-player {
     --media-object-fit: cover;
     --controls: none;
     position: relative;
     border: none;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 

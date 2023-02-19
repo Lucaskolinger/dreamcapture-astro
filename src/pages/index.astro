@@ -25,13 +25,14 @@ import Contact from "../components/Contact.astro";
       }
       body,
       html {
-        scroll-snap-type: proximity;
-        scroll-snap-type: y proximity;
-        scroll-snap-points-y: repeat(100vh);
+        scroll-snap-type: mandatory;
+        scroll-snap-type: y mandatory;
+        scroll-snap-points-y: repeat(100%);
         margin: 0;
         padding: 0;
         font-family: "quicksand";
-        height: -webkit-fill-available;
+        height: 100%;
+        background-color: black;
       }
 
       button {
